@@ -51,10 +51,10 @@ public class CustomerRepositoryTest {
 
         Optional<CustomerEntity> savedEntity = customerRepository.findById(11L);
 
-        savedEntity.ifPresent(customer -> {
+        savedEntity.ifPresentOrElse(customer -> {
             Assert.assertSame(11L, customer.getId());
             Assert.assertEquals( "koko", customer.getFirstName());
             Assert.assertEquals("momo", customer.getLastName());
-        });
+        }, Assert::fail);
     }
 }
